@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+*venv/
+venv/
+.env/
+ENV/
+env.bak/
+*.venv/
+
+# VS Code settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# PyCharm
+.idea/
+
+# Flask-related files
+instance/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Python environment
+*.egg-info/
+dist/
+build/
+
+# Ignore .env files with secrets
+.env
