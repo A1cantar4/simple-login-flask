@@ -1,10 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
-USERNAME = "admin"
-PASSWORD = "password"
-# SQL can be used in the future
+# Username and Password loaded from '.env'
+db_username = os.getenv("db_username")
+db_password = os.getenv("db_password")
+# In future, you can add the SQL DataBase
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -14,8 +19,8 @@ def login():
         # Request method to get user input from the login form
         # Users must fill out the form in 'login.html'
         
-        if username == USERNAME and password == PASSWORD: # Data verification
-            return redirect(url_for("welcome"))
+        if username == db_username and password == db_password: # Data verification
+            return redirect(url_for("welcome", user=username))
         else:
             return render_template("login.html",
                                    error="Usuário ou Senha Inválidos")
@@ -23,7 +28,8 @@ def login():
 
 @app.route("/welcome") # Route accessed after successful login
 def welcome():
-    return render_template("welcome.html")
+    user = request.args.get("user")
+    return render_template("welcome.html", user=user)
 
 if __name__ == "__main__":
     app.run(debug=True)
